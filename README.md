@@ -13,7 +13,7 @@ responses to user queries.
 
 - Python 3.12.4
 - Virtual Environment (optional but recommended)
-- Dependencies listed in `requirements.txt`
+
 
 ### Installation
 
