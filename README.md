@@ -113,11 +113,10 @@ def process_context(entry, chunk_size, chunk_overlap):
    index = faiss.read_index("faiss_index.bin")
 
 # Load metadata
-    with open("faiss_metadata.pkl", "rb") as f:
-       metadata = pickle.load(f)
-
-   processed_docs = metadata["processed_docs"]
-   model_name = metadata["model_name"]
+     with open("faiss_metadata.pkl", "rb") as f:
+        metadata = pickle.load(f)
+     processed_docs = metadata["processed_docs"]
+     model_name = metadata["model_name"]
 
 # Re-initialize the embedding model
    embedding_model = HuggingFaceEmbeddings(model_name=model_name)
