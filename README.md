@@ -26,13 +26,13 @@ responses to user queries.
 
 ### Usage
 # Loading the Dataset
-  from datasets import load_dataset
-  ds = load_dataset("rajpurkar/squad")
+    from datasets import load_dataset
+    ds = load_dataset("rajpurkar/squad")
 
 # processing the dataset
- import re
- from langchain.text_splitter import RecursiveCharacterTextSplitter
-  def clean_markdown(text):
+  import re
+  from langchain.text_splitter import RecursiveCharacterTextSplitter
+   def clean_markdown(text):
 
     """Clean Markdown syntax from text."""
     text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
