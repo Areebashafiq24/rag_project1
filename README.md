@@ -30,22 +30,22 @@ responses to user queries.
     ds = load_dataset("rajpurkar/squad")
 
 # processing the dataset
-   import re
-   from langchain.text_splitter import RecursiveCharacterTextSplitter
+    import re
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
   
-   def clean_markdown(text):
-    """Clean Markdown syntax from text."""
-    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
-    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
-    text = re.sub(r'\*([^*]+)\*', r'\1', text)
-    text = re.sub(r'__([^_]+)__', r'\1', text)
-    text = re.sub(r'_([^_]+)_', r'\1', text)
-    text = re.sub(r'!\[[^\]]]*]\([^)]*\)', '', text)
-    text = re.sub(r'#+\s?', '', text)
-    text = re.sub(r'\|', ' ', text)
-    text = re.sub(r'-{2,}', '', text)
-    text = re.sub(r'\n{2,}', '\n', text)
-    return text.strip()  # Strip extra spaces
+    def clean_markdown(text):
+      """Clean Markdown syntax from text."""
+      text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+      text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+      text = re.sub(r'\*([^*]+)\*', r'\1', text)
+      text = re.sub(r'__([^_]+)__', r'\1', text)
+      text = re.sub(r'_([^_]+)_', r'\1', text)
+      text = re.sub(r'!\[[^\]]]*]\([^)]*\)', '', text)
+      text = re.sub(r'#+\s?', '', text)
+      text = re.sub(r'\|', ' ', text)
+      text = re.sub(r'-{2,}', '', text)
+      text = re.sub(r'\n{2,}', '\n', text)
+      return text.strip()  # Strip extra spaces
 
 def process_context(entry, chunk_size, chunk_overlap):
 
