@@ -113,34 +113,33 @@ def process_context(entry, chunk_size, chunk_overlap):
    index = faiss.read_index("faiss_index.bin")
 
 # Load metadata
-  with open("faiss_metadata.pkl", "rb") as f:
-     metadata = pickle.load(f)
+    with open("faiss_metadata.pkl", "rb") as f:
+       metadata = pickle.load(f)
 
   processed_docs = metadata["processed_docs"]
   model_name = metadata["model_name"]
 
 # Re-initialize the embedding model
- embedding_model = HuggingFaceEmbeddings(model_name=model_name)
- sentence_model = SentenceTransformer(model_name)
+   embedding_model = HuggingFaceEmbeddings(model_name=model_name)
+   sentence_model = SentenceTransformer(model_name)
 
 # Create the FAISS vector store
- faiss_index = FAISS(embedding_function=embedding_model, index=index, docstore=None, index_to_docstore_id=None)
+   faiss_index = FAISS(embedding_function=embedding_model, index=index, docstore=None, index_to_docstore_id=None)
 
 
 
 # GENERATING RESPONSES 
-  import torch
-  from transformers import GPTNeoForCausalLM, GPT2Tokenizer
+    import torch
+    from transformers import GPTNeoForCausalLM, GPT2Tokenizer
 
 # Load the GPT-Neo model and tokenizer
- model_name = "EleutherAI/gpt-neo-1.3B"
- tokenizer = GPT2Tokenizer.from_pretrained(model_name)
- model = GPTNeoForCausalLM.from_pretrained(model_name)
+   model_name = "EleutherAI/gpt-neo-1.3B"
+   tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+   model = GPTNeoForCausalLM.from_pretrained(model_name)
 
 # Set the pad token to be the eos token
- tokenizer.pad_token = tokenizer.eos_token
- 
- def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
+   tokenizer.pad_token = tokenizer.eos_token
+   def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
 # Combine the query and retrieved documents
     input_text = f"Query: {query}\nDocuments:\n{retrieved_docs}\nAnswer:"
 
