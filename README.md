@@ -132,9 +132,9 @@ def process_context(entry, chunk_size, chunk_overlap):
      from transformers import GPTNeoForCausalLM, GPT2Tokenizer
 
 # Load the GPT-Neo model and tokenizer
-   model_name = "EleutherAI/gpt-neo-1.3B"
-   tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-   model = GPTNeoForCausalLM.from_pretrained(model_name)
+     model_name = "EleutherAI/gpt-neo-1.3B"
+     tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+     model = GPTNeoForCausalLM.from_pretrained(model_name)
 
 # Set the pad token to be the eos token
    tokenizer.pad_token = tokenizer.eos_token
