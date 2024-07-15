@@ -54,12 +54,13 @@ def clean_markdown(text):
     return text.strip()  # Strip extra spaces
 
 def process_context(entry, chunk_size, chunk_overlap):
+
     """Process a single context and return document chunks."""
+    
     context = entry['context']
     clean_context = clean_markdown(context)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     docs = text_splitter.split_text(clean_context)
-
     processed_docs = []
     for j, chunk in enumerate(docs):
         metadata = {
@@ -75,6 +76,7 @@ def process_context(entry, chunk_size, chunk_overlap):
     return processed_docs
 
 # Parameters for text splitting
+
 chunk_size = 1200
 chunk_overlap = 100
 
@@ -84,10 +86,8 @@ for entry in ds['train'].select(range(50000)):
     processed_docs.extend(process_context(entry, chunk_size, chunk_overlap))
 
 
+#EMBEDDING AND INDEXING 
 
-
-
-###EMBEDDING AND INDEXING 
 from sentence_transformers import SentenceTransformer
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
