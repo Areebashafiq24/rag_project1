@@ -79,15 +79,12 @@ def process_context(entry, chunk_size, chunk_overlap):
 
 chunk_size = 1200
 chunk_overlap = 100
-
-
 processed_docs = []
 for entry in ds['train'].select(range(50000)):
     processed_docs.extend(process_context(entry, chunk_size, chunk_overlap))
 
 
-#EMBEDDING AND INDEXING 
-
+# EMBEDDING AND INDEXING 
 from sentence_transformers import SentenceTransformer
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -147,13 +144,13 @@ model = GPTNeoForCausalLM.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 
 def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
-    # Combine the query and retrieved documents
+# Combine the query and retrieved documents
     input_text = f"Query: {query}\nDocuments:\n{retrieved_docs}\nAnswer:"
 
-    # Tokenize the input
+# Tokenize the input
     inputs = tokenizer(input_text, return_tensors="pt", padding=True, truncation=True, max_length=max_input_length)
 
-    # Generate the response
+# Generate the response
     output = model.generate(
         input_ids=inputs["input_ids"],
         attention_mask=inputs["attention_mask"],
@@ -162,7 +159,7 @@ def generate_response(query, retrieved_docs, max_input_length=1024, max_new_toke
         pad_token_id=tokenizer.eos_token_id
     )
 
-    # Decode the output
+# Decode the output
     response = tokenizer.decode(output[0], skip_special_tokens=True)
     return response
 
