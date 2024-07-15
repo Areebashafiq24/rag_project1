@@ -162,12 +162,12 @@ def process_context(entry, chunk_size, chunk_overlap):
     return response
 
 # Example usage
- query = "What is the capital of France?"
+   query = "What is the capital of France?"
 # Combine the chunks of the top retrieved document as a single string
- retrieved_docs = " ".join([chunk for chunk in processed_docs[:5]])
+    retrieved_docs = " ".join([chunk for chunk in processed_docs[:5]])
 
- response = generate_response(query, retrieved_docs)
- print("Response:", response)
+    response = generate_response(query, retrieved_docs)
+    print("Response:", response)
 
 
 
