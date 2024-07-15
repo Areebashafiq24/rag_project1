@@ -102,12 +102,12 @@ def process_context(entry, chunk_size, chunk_overlap):
 
 # Loading the FAISS Index and Metadata
 
-  import faiss
-  import numpy as np
-  import pickle
-  from langchain.vectorstores import FAISS
-  from langchain.embeddings import HuggingFaceEmbeddings
-  from sentence_transformers import SentenceTransformer
+    import faiss
+    import numpy as np
+    import pickle
+    from langchain.vectorstores import FAISS
+    from langchain.embeddings import HuggingFaceEmbeddings
+    from sentence_transformers import SentenceTransformer
 
 # Load FAISS index
    index = faiss.read_index("faiss_index.bin")
@@ -116,21 +116,21 @@ def process_context(entry, chunk_size, chunk_overlap):
     with open("faiss_metadata.pkl", "rb") as f:
        metadata = pickle.load(f)
 
-  processed_docs = metadata["processed_docs"]
-  model_name = metadata["model_name"]
+   processed_docs = metadata["processed_docs"]
+   model_name = metadata["model_name"]
 
 # Re-initialize the embedding model
    embedding_model = HuggingFaceEmbeddings(model_name=model_name)
    sentence_model = SentenceTransformer(model_name)
 
 # Create the FAISS vector store
-   faiss_index = FAISS(embedding_function=embedding_model, index=index, docstore=None, index_to_docstore_id=None)
+    faiss_index = FAISS(embedding_function=embedding_model, index=index, docstore=None, index_to_docstore_id=None)
 
 
 
 # GENERATING RESPONSES 
-    import torch
-    from transformers import GPTNeoForCausalLM, GPT2Tokenizer
+     import torch
+     from transformers import GPTNeoForCausalLM, GPT2Tokenizer
 
 # Load the GPT-Neo model and tokenizer
    model_name = "EleutherAI/gpt-neo-1.3B"
