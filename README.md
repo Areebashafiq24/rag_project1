@@ -32,8 +32,8 @@ responses to user queries.
 # processing the dataset
   import re
   from langchain.text_splitter import RecursiveCharacterTextSplitter
-   def clean_markdown(text):
-
+  
+  def clean_markdown(text):
     """Clean Markdown syntax from text."""
     text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
     text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
