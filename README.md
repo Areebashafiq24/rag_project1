@@ -25,7 +25,7 @@ responses to user queries.
 
 
 ### Usage
-###Loading the Dataset
+# Loading the Dataset
 
 from datasets import load_dataset
 ds = load_dataset("rajpurkar/squad")
