@@ -76,11 +76,11 @@ def process_context(entry, chunk_size, chunk_overlap):
     return processed_docs
 
 # Parameters for text splitting
-   chunk_size = 1200
-   chunk_overlap = 100
-   processed_docs = []
-   for entry in ds['train'].select(range(50000)):
-      processed_docs.extend(process_context(entry, chunk_size, chunk_overlap))
+    chunk_size = 1200
+    chunk_overlap = 100
+    processed_docs = []
+    for entry in ds['train'].select(range(50000)):
+       processed_docs.extend(process_context(entry, chunk_size, chunk_overlap))
 
 # EMBEDDING AND INDEXING 
     from sentence_transformers import SentenceTransformer
