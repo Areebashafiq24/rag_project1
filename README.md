@@ -129,19 +129,19 @@ def process_context(entry, chunk_size, chunk_overlap):
 
 
 
-### GENERATING RESPONSES 
- import torch
- from transformers import GPTNeoForCausalLM, GPT2Tokenizer
+# GENERATING RESPONSES 
+  import torch
+  from transformers import GPTNeoForCausalLM, GPT2Tokenizer
 
 # Load the GPT-Neo model and tokenizer
-model_name = "EleutherAI/gpt-neo-1.3B"
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-model = GPTNeoForCausalLM.from_pretrained(model_name)
+ model_name = "EleutherAI/gpt-neo-1.3B"
+ tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+ model = GPTNeoForCausalLM.from_pretrained(model_name)
 
 # Set the pad token to be the eos token
-tokenizer.pad_token = tokenizer.eos_token
-
-def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
+ tokenizer.pad_token = tokenizer.eos_token
+ 
+ def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
 # Combine the query and retrieved documents
     input_text = f"Query: {query}\nDocuments:\n{retrieved_docs}\nAnswer:"
 
@@ -162,12 +162,12 @@ def generate_response(query, retrieved_docs, max_input_length=1024, max_new_toke
     return response
 
 # Example usage
-query = "What is the capital of France?"
+ query = "What is the capital of France?"
 # Combine the chunks of the top retrieved document as a single string
-retrieved_docs = " ".join([chunk for chunk in processed_docs[:5]])
+ retrieved_docs = " ".join([chunk for chunk in processed_docs[:5]])
 
-response = generate_response(query, retrieved_docs)
-print("Response:", response)
+ response = generate_response(query, retrieved_docs)
+ print("Response:", response)
 
 
 
