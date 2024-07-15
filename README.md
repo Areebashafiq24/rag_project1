@@ -137,8 +137,10 @@ def process_context(entry, chunk_size, chunk_overlap):
      model = GPTNeoForCausalLM.from_pretrained(model_name)
 
 # Set the pad token to be the eos token
-   tokenizer.pad_token = tokenizer.eos_token
-   def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
+     tokenizer.pad_token = tokenizer.eos_token
+     def generate_response(query, retrieved_docs, max_input_length=1024, max_new_tokens=512):
+
+     
 # Combine the query and retrieved documents
     input_text = f"Query: {query}\nDocuments:\n{retrieved_docs}\nAnswer:"
 
