@@ -119,8 +119,9 @@ def process_context(entry, chunk_size, chunk_overlap):
      model_name = metadata["model_name"]
 
 # Re-initialize the embedding model
-   embedding_model = HuggingFaceEmbeddings(model_name=model_name)
-   sentence_model = SentenceTransformer(model_name)
+     embedding_model = HuggingFaceEmbeddings (model_name=model_name)
+     
+     sentence_model = SentenceTransformer(model_name)
 
 # Create the FAISS vector store
     faiss_index = FAISS(embedding_function=embedding_model, index=index, docstore=None, index_to_docstore_id=None)
