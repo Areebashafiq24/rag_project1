@@ -76,49 +76,48 @@ def process_context(entry, chunk_size, chunk_overlap):
     return processed_docs
 
 # Parameters for text splitting
- chunk_size = 1200
- chunk_overlap = 100
- processed_docs = []
- for entry in ds['train'].select(range(50000)):
-    processed_docs.extend(process_context(entry, chunk_size, chunk_overlap))
+  chunk_size = 1200
+  chunk_overlap = 100
+  processed_docs = []
+  for entry in ds['train'].select(range(50000)):
+     processed_docs.extend(process_context(entry, chunk_size, chunk_overlap))
 
 # EMBEDDING AND INDEXING 
- from sentence_transformers import SentenceTransformer
- from langchain.vectorstores import FAISS
- from langchain.embeddings import HuggingFaceEmbeddings
+   from sentence_transformers import SentenceTransformer
+   from langchain.vectorstores import FAISS
+   from langchain.embeddings import HuggingFaceEmbeddings
 
 # Initialize the model
- model_name = "sentence-transformers/all-MiniLM-L6-v2"
- model = SentenceTransformer(model_name)
- hf_embedding = HuggingFaceEmbeddings(model_name=model_name)
+   model_name = "sentence-transformers/all-MiniLM-L6-v2"
+   model = SentenceTransformer(model_name)
+   hf_embedding = HuggingFaceEmbeddings(model_name=model_name)
 
 # Embed and index all the documents using FAISS
- db = FAISS.from_texts(processed_docs, hf_embedding)
+   db = FAISS.from_texts(processed_docs, hf_embedding)
 
 # Save the indexed data locally
- db.save_local("faiss_AiDoc")
+   db.save_local("faiss_AiDoc")
 
 
 
+# Loading the FAISS Index and Metadata
 
-### Loading the FAISS Index and Metadata
-
- import faiss
- import numpy as np
- import pickle
- from langchain.vectorstores import FAISS
- from langchain.embeddings import HuggingFaceEmbeddings
- from sentence_transformers import SentenceTransformer
+  import faiss
+  import numpy as np
+  import pickle
+  from langchain.vectorstores import FAISS
+  from langchain.embeddings import HuggingFaceEmbeddings
+  from sentence_transformers import SentenceTransformer
 
 # Load FAISS index
- index = faiss.read_index("faiss_index.bin")
+   index = faiss.read_index("faiss_index.bin")
 
 # Load metadata
- with open("faiss_metadata.pkl", "rb") as f:
-    metadata = pickle.load(f)
+  with open("faiss_metadata.pkl", "rb") as f:
+     metadata = pickle.load(f)
 
- processed_docs = metadata["processed_docs"]
- model_name = metadata["model_name"]
+  processed_docs = metadata["processed_docs"]
+  model_name = metadata["model_name"]
 
 # Re-initialize the embedding model
  embedding_model = HuggingFaceEmbeddings(model_name=model_name)
